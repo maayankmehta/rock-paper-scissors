@@ -12,8 +12,8 @@ scissors = 3
 
 #rule dictionaries
 
-names = {rock: "ROCK", paper: "PAPER", scissors: "SCISSORS"}
-rules = {rock: scissors, scissors: paper, paper: rock }
+names = { rock: "Rock", paper: "Paper", scissors: "Scissors" }
+rules = { rock: scissors, paper: rock, scissors: paper }
 
 #scores
 
@@ -22,60 +22,61 @@ computer_score = 0
 
 #start game
 
-def start() :
-    print "wanna play rock, paper, scissors?"
+def start():
+    print "Let's play the game."
     while game():
         pass
     scores()
 
 def game():
     player = move()
-    computer = random.randint(1, 3)   #using random module
+    computer = random.randint(1,3)
     result(player, computer)
     return play_again()
 
 def move():
     while True:
-        print 
-        player = raw_input("Rock = 1\nPaper = 2\nScissors = 3\nMake A Move")
+        print
+        player = raw_input("Rock = 1\nPaper = 2\nScissors = 3\nMake a move: ")
         try:
             player = int(player)
-            if player in (1, 2, 3):
+            if player in (1,2,3):
                 return player
         except ValueError:
             pass
-        print "please enter correct response!!"
+        print "Oops! Please enter valid number."
 
-def result():
+def result (player, computer):
     print "1..."
     time.sleep(1)
     print "2..."
     time.sleep(1)
-    print "3!!"
+    print "3!"
     time.sleep(0.5)
-    print "Computer threw {0}!".format(name[computer])  
+    print "Computer threw {0}!".format(names[computer])
     global player_score, computer_score
     if player == computer:
-        print "Tie..."
+        print "Tie game."
     else:
         if rules[player] == computer:
-            print "You Win!!"
+            print "You win"
             player_score += 1
-        else :              
-            print "HAHAHAHAHA, You LOSE!!"
+        else:
+            print "You lose"
             computer_score += 1
 
 def play_again():
-    answer = raw_input("Come on be a sport, play again, yes/no?")
-    if answer in ("yes", "Yes","y","Y"):
+    answer = raw_input("Would you like to play again? y/n: ")
+    if answer in ("y", "Y", "Yes", "yes"):
         return answer
     else:
-        print "See You next time!"
+        print "Thank you for playing, Bye!"
 
 def scores():
+    global player_score, computer_score
     print "HIGH SCORES"
-    print "player:", player_score
-    print "computer:", computer_score
+    print "Player: ", player_score
+    print "Computer: ", computer_score
 
-if __name__ == 'main' :
-    start()    
+if __name__ ==  "__main__":
+    start()
